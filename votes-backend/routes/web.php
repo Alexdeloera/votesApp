@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('app\Http\Controller')->group(function(){
-    Route::get('/', 'VoteController@index')->name('home');
+Route::get('/', function () {
+    return view('welcome');
 });
