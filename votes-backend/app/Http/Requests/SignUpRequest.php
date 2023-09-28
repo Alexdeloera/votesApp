@@ -13,7 +13,7 @@ class SignUpRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -29,4 +29,14 @@ class SignUpRequest extends FormRequest
             'password'=>'required|min:5'
         ];
     }
+    public function messages()
+    {
+        return[
+            'name.requited'=>'El:attribute es obligatorio',
+            'email.requited'=>'El:attribute es obligatorio',
+            'password.requited'=>'El:attribute es obligatorio',
+        ];
+    }
+
+    
 }

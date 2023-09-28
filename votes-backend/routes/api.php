@@ -17,9 +17,10 @@ use App\Http\Controllers\PostController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    Route::get('/post',[PostController::class,'getPost']);
     return $request->user();
 });
 
+Route::get('/post',[PostController::class,'getPosts']);
+Route::post('/create-post',[PostController::class,'createPost']);
 Route::post('/singn-in', [AuthController::class, 'singnIn']);
 Route::post('/singn-up',[AuthController::class,'singnUp']);

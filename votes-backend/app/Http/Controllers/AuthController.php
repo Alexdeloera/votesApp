@@ -36,7 +36,7 @@ class AuthController extends Controller
         return response()->json($response, 400);
     }
 
-    public function singnUp(Request $request)
+    public function singnUp(SignUpRequest $request)
     {
         $response = ["message" => ""];
         $data = json_decode($request->getContent());

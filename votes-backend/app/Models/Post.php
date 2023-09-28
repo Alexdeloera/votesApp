@@ -9,15 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Post extends Model
 {
     use HasFactory;
-
+    protected $table='post';
     protected $fillable = [
         'title',
-        'content',
+        'body',
         'user_id',
-        'date '
     ];
 
-    public function user(): BelongsTo
+    public function post(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
