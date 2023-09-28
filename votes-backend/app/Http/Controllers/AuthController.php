@@ -2,48 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SignInRequest;
+use App\Http\Requests\SignUpRequest;
 use Illuminate\Http\Request;
 
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuniante\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function singIn(Request $request)
+    public function singnIn(SignInRequest $request)
     {
-        $response = ["status" => 0, "msg" => ""];
+        $response = ["message" => ""];
         $data = json_decode($request->getContent());
         $user = User::where("email", $data->email)->first();
+
         if ($user) {
-            if (Hash::check($data->password, $user->password)) {
-                $tokens = $user->create_token("example");
-                $response["status"] = 1;
-                $response["msg"] = $tokens->plainTextToken;
+            if (FacadesHash::check($data->password, $user->password)) {
+                $tokens = $user->createToken("Authorization");
+
+                return response()->json([
+                    "token" => $tokens->plainTextToken
+                ], 200);
             } else {
-                $response["msg"] = "Invalid password";
+                $response["message"] = "Invalid password";
             }
         } else {
-            $response["msg"] = "Invalid email";
+            $response["message"] = "Invalid email";
         }
-        return response()->json($data);
+
+        return response()->json($response, 400);
     }
 
     public function singnUp(Request $request)
     {
-        $response = ["status" => 0, "message" => ""];
+        $response = ["message" => ""];
         $data = json_decode($request->getContent());
         $user = User::where("email", $data->email)->first();
 
         if ($user) {
             $response["message"] = "User already exist";
-            $response["status"] = 400;
 
-            return $response;
+            return response()->json($response, 400);
         }
 
         try {
-            $password = Hash::make($data->password);
+            $password = FacadesHash::make($data->password);
 
             User::insert([
                 'name' => $data->name,
@@ -51,12 +57,14 @@ class AuthController extends Controller
                 'password' => $password,
                 'active' => true
             ]);
-            $response["status"] = 200;
+
             $response["message"] = "User created succesfull";
 
-            return $response;
+            return response()->json($response, 202);
         } catch (Exception $e) {
-            $response["Message"] = "faill to create user " + $e;
+            $response["message"] = "Fail to create user " + $e;
+
+            return response()->json($response, 400);
         }
     }
 }
