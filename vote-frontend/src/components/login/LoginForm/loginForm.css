@@ -1,12 +1,15 @@
 .loginForm-container_main{
-  @apply flex border-2 border-black rounded-md w-52 p-2 mt-20
+  @apply border-2  rounded-md w-full p-2 mt-28
 }
 .loginForm-title{
-  @apply font-semibold mb-1
+  @apply font-semibold mb-3 text-3xl 
 }
 .loginForm-input{
-  @apply bg-slate-300 rounded-md mb-1 p-1
+  @apply bg-slate-200 rounded-md mb-2 p-3 w-80 mt-2 text-lg font-semibold
 }
 .loginForm-button{
-  @apply !bg-black text-white rounded-md p-1 mb-1 hover:bg-slate-700
+  @apply !bg-black text-white text-lg font-semibold rounded-md p-3 w-40 mt-4 mb-1 hover:!bg-slate-400
+}
+.loginForm-container_input{
+  @apply flex justify-center flex-col items-center
 }

@@ -1,15 +1,21 @@
 .formRegister-Conteiner_main{
-  @apply p-3 border-2 rounded-md border-black mt-16 p-2 w-56 
+  @apply p-3 border-2 rounded-md  mt-16 p-2 w-full
+
 }
 .formRegiser-input{
-  @apply bg-slate-300 rounded-md mb-2 p-1
+  @apply bg-slate-200 font-medium rounded-md mb-2 p-3 w-80 text-lg mt-2
 }
 .formRegister-title{
-  @apply font-semibold mb-1
+  @apply font-semibold mb-1 text-3xl
 }
 .formRegister-button{
-  @apply  !bg-black  text-white rounded-md p-1  hover:bg-slate-600
+  @apply  !bg-black  text-white rounded-md p-3 text-lg w-40 mb-5 mt-3 hover:!bg-slate-600 font-semibold
 }
 .formRegiser-mesage{
-  @apply text-red-600 text-xs mb-2 text-left mt-0 ml-2
+  @apply text-red-600 text-lg mb-2 text-left mt-0 ml-2 
+}
+
+.Register-container_imput
+{
+  @apply flex justify-center items-center flex-col
 }

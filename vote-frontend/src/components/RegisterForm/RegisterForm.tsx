@@ -28,7 +28,7 @@ export const RegisterForm :React.FC<iFormRegisterProps>= ({onSubmit}) => {
               Singn Up
             </h1>
           </div>
-          <div>
+          <div className="Register-container_imput">
             <input 
             type="text"
             placeholder="name"
@@ -37,16 +37,16 @@ export const RegisterForm :React.FC<iFormRegisterProps>= ({onSubmit}) => {
              />
             {errors.name && <p className='formRegiser-mesage'>{errors.name?.message}</p>}
           </div>
-          <div>
+          <div className="Register-container_imput">
             <input 
             type="text"
             placeholder="email"
             className="formRegiser-input"
-            {...register("password",RegisterValidations.password)} 
+            {...register("email",RegisterValidations.email)} 
             />
             {errors.email && <p className='formRegiser-mesage'>{errors.email?.message}</p>}
           </div>
-          <div>
+          <div className="Register-container_imput">
             <input 
             type="text"
             placeholder="password"
