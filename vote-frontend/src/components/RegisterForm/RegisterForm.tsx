@@ -35,13 +35,16 @@ export const RegisterForm :React.FC<iFormRegisterProps>= ({onSubmit}) => {
             className="formRegiser-input"
             {...register("name",RegisterValidations.name)}
              />
+            {errors.name && <p className='formRegiser-mesage'>{errors.name?.message}</p>}
           </div>
           <div>
             <input 
             type="text"
             placeholder="email"
             className="formRegiser-input"
-            {...register("password",RegisterValidations.password)} />
+            {...register("password",RegisterValidations.password)} 
+            />
+            {errors.email && <p className='formRegiser-mesage'>{errors.email?.message}</p>}
           </div>
           <div>
             <input 
@@ -50,6 +53,7 @@ export const RegisterForm :React.FC<iFormRegisterProps>= ({onSubmit}) => {
             className="formRegiser-input"
             {...register("password",RegisterValidations.password)}
              />
+            {errors.password && <p className='formRegiser-mesage'>{errors.password?.message}</p>}
           </div>
           <button type="submit" className="formRegister-button">Save</button>
         </form>
