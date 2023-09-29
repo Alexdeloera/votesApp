@@ -11,26 +11,6 @@ use Illuminate\Support\Facades\Hash as FacadesHash;
 
 class AuthController extends Controller
 {
-    /*
-    {
-        success: true,
-        message: 'Sign in successful',
-        access_token: '',
-        token_type: 'Bearer',
-        user: {
-            name,
-            email,
-            createdAt,
-        }
-    }
-
-    {
-        success: false,
-        message: 'Sign in successful',
-    }
-
-    code 400
-    */
     public function singnIn(SignInRequest $request)
     {
         if (!Auth::attempt($request->only('email','password')))
