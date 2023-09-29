@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->text("title")->require(true);
             $table->text("body")->require(true);
+            $table->text("state")->require(true);
+            $table->date("date")->require(true);
             $table->integer("user_id");
             $table->timestamps();
             $table->foreign("user_id")

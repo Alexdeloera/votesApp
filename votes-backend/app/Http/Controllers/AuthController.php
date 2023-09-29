@@ -4,67 +4,81 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SignInRequest;
 use App\Http\Requests\SignUpRequest;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
-use Exception;
 use Illuminate\Support\Facades\Hash as FacadesHash;
-use Illuniante\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    /*
+    {
+        success: true,
+        message: 'Sign in successful',
+        access_token: '',
+        token_type: 'Bearer',
+        user: {
+            name,
+            email,
+            createdAt,
+        }
+    }
+
+    {
+        success: false,
+        message: 'Sign in successful',
+    }
+
+    code 400
+    */
     public function singnIn(SignInRequest $request)
     {
-        $response = ["message" => ""];
-        $data = json_decode($request->getContent());
-        $user = User::where("email", $data->email)->first();
-
-        if ($user) {
-            if (FacadesHash::check($data->password, $user->password)) {
-                $tokens = $user->createToken("Authorization");
-
-                return response()->json([
-                    "token" => $tokens->plainTextToken
-                ], 200);
-            } else {
-                $response["message"] = "Invalid password";
-            }
-        } else {
-            $response["message"] = "Invalid email";
+        if (!Auth::attempt($request->only('email','password')))
+        {
+            return response()
+                ->json(["success"=>false,"message"=>"Singn in unsuccessful"],401);
         }
+        $user=User::where('email',$request['email'])->firstOrFail();
+        $token=$user->createToken('aunth_token')->plainTextToken;
 
-        return response()->json($response, 400);
+        return response()
+            ->json([
+                "success"=>true,
+                "message"=>"Singn in successful",
+                "access_token"=>$token,
+                "token_type"=>'Bearer',
+                "user"=>[
+                    "name"=>$user->name,
+                    "email"=>$user->email,
+                    "createdAt"=>$user->created_at
+                ]
+            ]);
     }
 
     public function singnUp(SignUpRequest $request)
     {
-        $response = ["message" => ""];
-        $data = json_decode($request->getContent());
-        $user = User::where("email", $data->email)->first();
+        $userFound = User::where("email", $request->email)->first();
 
-        if ($user) {
-            $response["message"] = "User already exist";
-
-            return response()->json($response, 400);
+        if ($userFound) {
+            return response()->json([
+                "message" => "User already exist",
+                "success" => false,
+            ], 400);
         }
 
-        try {
-            $password = FacadesHash::make($data->password);
+        $hashPassword = FacadesHash::make($request->password);
 
-            User::insert([
-                'name' => $data->name,
-                'email' => $data->email,
-                'password' => $password,
-                'active' => true
-            ]);
+        $user = User::create([
+            "name" => $request->name,
+            "email" => $request->email,
+            "password" => $hashPassword,
+            "active" => true,
+        ]);
 
-            $response["message"] = "User created succesfull";
-
-            return response()->json($response, 202);
-        } catch (Exception $e) {
-            $response["message"] = "Fail to create user " + $e;
-
-            return response()->json($response, 400);
-        }
+        return response()->json([
+            "user" => $user,
+            "message" => "User created succesfull",
+            "success" => true,
+        ], 202);
     }
 }
