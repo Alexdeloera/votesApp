@@ -1,0 +1,9 @@
+.navbar-nav{
+  @apply bg-white flex justify-between items-center font-bold text-black fixed w-full z-20 p-1 top-0 left-0 border-b border-gray-200  text-3xl
+}
+.navbar-ul{
+  @apply flex text-lg 
+}
+.navbar-li{
+  @apply mr-4 hover:text-gray-200
+}
