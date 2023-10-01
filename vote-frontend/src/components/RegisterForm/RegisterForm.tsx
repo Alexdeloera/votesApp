@@ -27,7 +27,7 @@ export const RegisterForm: React.FC<iFormRegisterProps> = ({ onSubmit }) => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <h1 className="formRegister-title">
-                Singn Up
+                Sign Up
               </h1>
             </div>
             <div className="Register-container_imput">
@@ -50,7 +50,7 @@ export const RegisterForm: React.FC<iFormRegisterProps> = ({ onSubmit }) => {
             </div>
             <div className="Register-container_imput">
               <input
-                type="text"
+                type="password"
                 placeholder="password"
                 className="formRegiser-input"
                 {...register("password", RegisterValidations.password)}

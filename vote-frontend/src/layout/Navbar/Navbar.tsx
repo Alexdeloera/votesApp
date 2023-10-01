@@ -29,10 +29,10 @@ export const Navbar = () => {
         />}
         <ul className="navbar-ul">
           {session.name == '' && <li className="navbar-li">
-            <Link to='/register'>Singn Up</Link>
+            <Link to='/register'>Sign Up</Link>
           </li>}
           {session.name == '' && <li className="navbar-li">
-            <Link to='/login'>Singn In</Link>
+            <Link to='/login'>Sign In</Link>
           </li>}
           {session.name !== '' && <li className="navbar-li">
             <Link to='/dashboard'>All Posts</Link>
@@ -41,7 +41,7 @@ export const Navbar = () => {
             <Link to='/createpost'>Add Post</Link>
           </li>}
           {session.name !== '' && <li className="navbar-li" >
-            <button onClick={handleClick}>Singn Out</button>
+            <button onClick={handleClick}>Sign Out</button>
           </li>}
           <li className="navbar-li">
             <Link to='/about'>About</Link>

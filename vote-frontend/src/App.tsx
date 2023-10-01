@@ -7,6 +7,7 @@ import { Register } from './views/Register'
 import { Login } from './views/Login'
 import { CreatePost } from './views/CreatePost'
 import { Dashboard } from './views/Dashboard'
+import { About } from './views/About'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/login' element={<Login/>} />
         <Route path='/createpost' element={<CreatePost/>} />
         <Route path='/dashBoard' element={<Dashboard/>} />
+        <Route path='/about' element={<About/>} />
       </Route>
     </Routes>
   )

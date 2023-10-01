@@ -27,7 +27,7 @@ export const LoginForm: React.FC<iLogProps> = ({ logSubmit }) => {
           <form onSubmit={handleSubmit(logSubmit)}>
             <div className="container-principal">
               <div>
-                <h1 className="loginForm-title">Login</h1>
+                <h1 className="loginForm-title">Sign in</h1>
               </div>
               <div className="loginForm-container_input">
                 <input
