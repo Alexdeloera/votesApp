@@ -5,12 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SignInRequest;
 use App\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash as FacadesHash;
 
 class AuthController extends Controller
 {
+    public function getUser(Request $request){
+
+        if($request->has('user_id')){
+            $user=User::where('id',$request->user_id)->get();
+        }else{
+            $user=User::all();
+        }
+        return response()->json($user,200);
+    }
+
     public function singnIn(SignInRequest $request)
     {
         if (!Auth::attempt($request->only('email','password')))
@@ -28,6 +39,7 @@ class AuthController extends Controller
                 "access_token"=>$token,
                 "token_type"=>'Bearer',
                 "user"=>[
+                    "id"=>$user->id, 
                     "name"=>$user->name,
                     "email"=>$user->email,
                     "createdAt"=>$user->created_at

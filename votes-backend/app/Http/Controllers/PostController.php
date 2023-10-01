@@ -11,13 +11,18 @@ class PostController extends Controller
 {
   public function getPosts(Request $request)
   {
-
     if ($request->has('finder')) {
       $posts = Post::where('finder', true)->get();
     } else {
-      $posts = Post::all();
+      $posts = Post::select('post.title', 'post.date', 'post.id', 'post.body', 'post.state', 'users.name', Likes::raw('count(likes.id) as like_count'))
+      ->leftJoin('users', 'post.user_id', '=', 'users.id')
+      ->leftJoin('likes', 'post.id', '=', 'likes.post_id')
+      ->groupBy('post.title', 'post.date', 'post.id', 'post.body', 'post.state', 'users.name')
+      ->get();
+        
+
+      return response()->json($posts, 200);
     }
-    return response()->json($posts, 200);
   }
 
   public function createPost(Request $request)

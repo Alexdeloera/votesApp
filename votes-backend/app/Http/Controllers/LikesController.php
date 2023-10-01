@@ -11,7 +11,7 @@ class LikesController extends Controller
     public function getLikes(Request $request){
 
         if($request->has('post_id')){
-            $likes=Likes::where('post_is',true)->get();
+            $likes=Likes::where('post_id',$request->post_id)->get();
         }else{
             $likes=Likes::all();
         }
