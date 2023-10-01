@@ -1,13 +1,17 @@
 import { useForm } from "react-hook-form"
-import LoginValidations from "../../../validations/LoginValidations"
+
 import './loginForm.css'
+import LoginValidations from "../../../validations/LoginValidations"
+
 export interface iLogin {
   email: string,
   password: string
 }
+
 interface iLogProps {
   logSubmit: (values: iLogin) => void
 }
+
 export const LoginForm: React.FC<iLogProps> = ({ logSubmit }) => {
   const { register, handleSubmit, formState: { errors } } = useForm<iLogin>({
     defaultValues: {

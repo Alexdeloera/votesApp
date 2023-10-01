@@ -12,7 +12,7 @@
 }
 .postForm-textArea
 {
-  @apply mt-4 p-2 bg-slate-200 text-xl w-80 h-44
+  @apply mt-4 p-2 bg-slate-200 text-xl min-w-full h-44 min-h-fit
 }
 .postForm-container_inputs
 {
@@ -23,7 +23,7 @@
 }
 .postForm-button
 {
-  @apply !bg-black text-white font-semibold p-3 rounded-md w-20 text-lg hover:!bg-slate-300
+  @apply !bg-black text-white font-semibold p-3 rounded-md w-40 m-4 text-lg hover:!bg-slate-300 
 }
 .postForm-select
 {

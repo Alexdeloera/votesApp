@@ -6,6 +6,7 @@ import { Home } from './views/Home'
 import { Register } from './views/Register'
 import { Login } from './views/Login'
 import { CreatePost } from './views/CreatePost'
+import { Dashboard } from './views/Dashboard'
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login/>} />
         <Route path='/createpost' element={<CreatePost/>} />
-
+        <Route path='/dashBoard' element={<Dashboard/>} />
       </Route>
     </Routes>
   )

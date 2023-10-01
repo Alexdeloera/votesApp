@@ -1,20 +1,30 @@
 import { useForm } from "react-hook-form"
 import './postForm.css'
+import PostValidations from "../../validations/PostValidations"
+import { iPost } from "../../views/CreatePost"
 
-export const PostForm = () => {
+interface ICretateProps{
+  id:number,
+  name:String,
+  postSubmit:(values:iPost)=>void
+}
+
+
+export const PostForm = ({name,id,postSubmit}:ICretateProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       title: '',
       state: '',
-      autor: '',
+      user_id: 0,
       date: '',
       body: ''
     }
   })
+  
   return (
     <>
       <div className="postForm-container">
-        <form>
+        <form onSubmit={handleSubmit(postSubmit)}>
           <div className="postForm-container_main">
             <h1 className="postForm-title">
               Create Post
@@ -23,12 +33,14 @@ export const PostForm = () => {
               <div className="postForm-container_inputs">
                 <input
                   type="text"
-                  placeholder="title"
+                  placeholder="title" 
                   className="postForm-input"
+                  {...register("title",PostValidations.title)}
                 />
+                {errors.title && <p className='formRegiser-mesage'>{errors.title?.message}</p>}
               </div>
               <div className="postForm-container_inputs">
-                <select name="select" className="postForm-select">
+                <select className="postForm-select" {...register("state",PostValidations.state)}>
                   <option value="" selected>Select state</option>
                   <option value="Aguascalientes">Aguascalientes</option>
                   <option value="Baja California">Baja California</option>
@@ -63,32 +75,34 @@ export const PostForm = () => {
                   <option value="Yucatán">Yucatán</option>
                   <option value="Zacatecas">Zacatecas</option>
                 </select>
+                
               </div>
+              {errors.state && <p className='formRegiser-mesage'>{errors.state?.message}</p>}
               <div className="postForm-container_inputs">
                 <input
                   type="text"
-                  placeholder="state"
-                  className="postForm-input"
-                />
-              </div>
-              <div className="postForm-container_inputs">
-                <input
-                  type="text"
+                  value={name.toString()}
                   disabled={true}
-                  className="postForm-input" />
+                  className="postForm-input" 
+                  {...register("user_id",PostValidations.user_id)}/>
+                  {errors.user_id && <p className='formRegiser-mesage'>{errors.user_id?.message}</p>}
               </div>
               <div className="postForm-container_inputs">
                 <input
                   type="date"
                   placeholder="date"
                   className="postForm-input "
+                  {...register("date",PostValidations.date)}
                 />
+                {errors.date && <p className='formRegiser-mesage'>{errors.date?.message}</p>}
               </div>
               <div className="postForm-container_inputs">
                 <textarea
                   placeholder="tap your ideas!"
                   className="postForm-textArea"
+                  {...register("body",PostValidations.body)}
                 />
+                {errors.body && <p className='formRegiser-mesage'>{errors.body?.message}</p>}
               </div>
               <div>
                 <button
