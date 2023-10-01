@@ -19,8 +19,7 @@ export const CreatePost = () => {
   const postSubmit= async (values:iPost)=> {
       values={...values,user_id:session.id}
       try {
-        const resp=await postPost(values);
-        console.log('entro');
+        const resp=await postPost({values:values,token:session.token});
         navigate('/dashboard');
 
       }catch (error) {

@@ -1,7 +1,15 @@
-import { IPost } from "../../interface/post.interface";
-
 interface IRowsProps {
-  post: IPost;
+  post: IRows;
+}
+
+export interface IRows {
+ title: string;
+ state: string;
+ date: string;
+ name: string;
+ id: number;
+ likes: number;
+ body: string;   
 }
 
 export const Post = ({ post }: IRowsProps) => {
@@ -11,8 +19,9 @@ export const Post = ({ post }: IRowsProps) => {
     <article className="border-2 w-full mb-6 py-5 rounded-md relative">
       <ul>
         <li>{post.title}</li>
-        <li>{post.state}</li>
-        <li>{post.date}</li>
+        <li>State: {post.state}</li>
+        <li>Date: {post.date}</li>
+        <li>Author: {post.name}</li>
         <li>{post.body}</li>
       </ul>
       <button
@@ -23,6 +32,7 @@ export const Post = ({ post }: IRowsProps) => {
           className=""
         />
       </button>
+      <span className="absolute top-4 right-12">{post.likes}</span>
     </article>
   )
 };

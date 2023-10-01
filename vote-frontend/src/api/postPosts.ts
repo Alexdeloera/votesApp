@@ -1,15 +1,18 @@
 import axios from "axios";
 import { iPost } from "../views/CreatePost";
-
-export const postPost = async (values: iPost) => {
+interface IPostProps{
+  values:iPost,
+  token:string
+}
+export const postPost = async (data:IPostProps) => {
   const url = "http://127.0.0.1:8000/api/post/create";
-  const token = "2|P5EHn8eyuMwcRVDNfjkjLDwncBgs9H3ZupDHwOoWf1ece9fa";
+  const defaultToken = "2|P5EHn8eyuMwcRVDNfjkjLDwncBgs9H3ZupDHwOoWf1ece9fa";
 
   try {
-    const post = await axios.post(url, values, {
+    const post = await axios.post(url, data.values, {
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${data.token||defaultToken}`,
       },
     });
 
