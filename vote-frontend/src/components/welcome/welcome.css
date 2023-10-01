@@ -1,0 +1,9 @@
+.welcome-container{
+  @apply mt-24 border-2 h-52 rounded-md p-10;
+}
+.welcome-title{
+  @apply mb-3 font-semibold text-2xl;
+}
+.welcome-p{
+  @apply text-lg;
+}

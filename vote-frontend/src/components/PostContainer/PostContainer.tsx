@@ -1,14 +1,30 @@
-import { IRows, Post } from "../Post/Post";
 
+import { IRows, Post } from "../Post/Post";
 interface IPostProps {
   posts: IRows[];
+  likes: any[];
 }
-export const PostContainer =({ posts }: IPostProps) => {
-  console.log(posts);
+export const PostContainer =({ posts,likes }: IPostProps) => {
+  console.log('likes',likes);
+  
+  const updatedPosts = posts.map((post) => {
+    const isLiked = likes.find((like) => {
+      if (like.post_id === post.id) {
+        return true;
+      }
+    });
+    return { ...post, like: !!isLiked };
+  });
   
   return (
     <section className="posts-container">
-      {posts.map((post) =>(<Post key={post.id} post={post}/>))}
+
+      {updatedPosts.map((post) =>{
+        console.log(post);
+        return(
+        <Post key={post.id} post={post}/>)
+        })}
+        
     </section>
   )
 }

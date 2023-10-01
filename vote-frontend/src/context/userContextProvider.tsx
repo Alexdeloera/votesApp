@@ -14,14 +14,22 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
     name: '',
     token: ''
   });
-  
+
+ 
   const toggleSession=(data:ISession)=>{
     setSession(data);
   }
+ 
+  const [search, setSearch] = useState('');
+
+  const handlechange = (values:string) => {
+    setSearch(values);
+  }
+
 
 
   return (
-    <sessionProvider.Provider value={{session,toggleSession}}> 
+    <sessionProvider.Provider value={{session,toggleSession,search,handlechange}}> 
       {children}
     </sessionProvider.Provider>
   );

@@ -1,0 +1,6 @@
+.post-title{
+  @apply text-2xl font-bold;
+}
+.post-hr{
+  @apply mt-3 w-9
+}

@@ -1,5 +1,7 @@
+import { Welcome } from "../components/welcome/Welcome"
+
 export const Home = () => {
   return(
-    <h1>Pagina de home</h1>
+    <Welcome/>
   )
 }

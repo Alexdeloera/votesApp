@@ -1,11 +1,15 @@
 import axios from "axios";
-import { iPost } from "../views/CreatePost";
+
+interface ILikes{
+  post_id:number,
+  user_id:number,
+}
 interface IPostProps{
-  values:iPost,
+  values:ILikes,
   token:string
 }
-export const postPost = async (data:IPostProps) => {
-  const url = "http://127.0.0.1:8000/api/post/create";
+export const postLike = async (data:IPostProps) => {
+  const url = "http://127.0.0.1:8000/api/likes/set";
   try {
     const post = await axios.post(url, data.values, {
       headers: {

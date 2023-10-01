@@ -1,0 +1,9 @@
+.about-container{
+  @apply mt-24 border-2 h-52 rounded-md p-10;
+}
+.about-title{
+  @apply mb-3 font-semibold text-2xl;
+}
+.about-p{
+  @apply text-lg;
+}
