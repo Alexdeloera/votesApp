@@ -36,20 +36,23 @@ class LikesController extends Controller
 
     }
 
-    public function deleteLike(Request $request){
-        $response=["message"=>""];
-        if($request->has('like_id')){
+    public function deleteLike(Request $request) {
+        $response = ["message" => ""];
+        
+        if ($request->has('user_id') && $request->has('post_id')) {
             try {
-                Likes::where('id',true)->delete();
-                $response["message"]="Like deleted";
-                return response()->json($response,200);
-                
-            } catch (Exception $e) {
-                return response()->json($e,400);
+                Likes::where('post_id', $request->post_id)
+                    ->where('user_id', $request->user_id)
+                    ->delete();
+                    
+                $response["message"] = "Like deleted";
+                return response()->json($response, 200);
+            } catch (\Exception $e) {
+                return response()->json(["message" => "Error deleting like"], 400);
             }
-        }else{
-            $response["message"]="Like delete error";
-                return response()->json($response,400);
+        } else {
+            $response["message"] = "Like delete error";
+            return response()->json($response, 400);
         }
     }
 }

@@ -27,9 +27,9 @@ Route::middleware('auth:sanctum')->group(function() {
 
     /* Likes Endpoints*/
     Route::prefix('/likes')->group(function(){
-        Route::post('/', [LikesController::class, 'getLikes']);
+        Route::get('/', [LikesController::class, 'getLikes']);
         Route::post('/set', [LikesController::class, 'setLikes']);
-        Route::delete('/delete', [LikesController::class, 'deleteLike']);
+        Route::post('/delete', [LikesController::class, 'deleteLike']);
 
     });
 
