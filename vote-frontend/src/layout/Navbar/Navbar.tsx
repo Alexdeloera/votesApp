@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import './navbar.css'
-import { useContext} from "react";
+import { useContext } from "react";
 import { sessionProvider } from "../../context/SessionContext";
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -16,11 +16,11 @@ export const Navbar = () => {
     navigate('login')
   }
   const { handlechange } = useContext(sessionProvider);
-   
-  const handleSearch = (e: any) => { 
+
+  const handleSearch = (e: any) => {
     handlechange(e.target.value);
   }
-  const location=window.location.pathname;
+  const location = window.location.pathname;
 
   return (
     <nav className="navbar-nav">
@@ -28,7 +28,7 @@ export const Navbar = () => {
         <Link to='/home' >Helping Community</Link>
       </h2>
       <div className="flex items-center">
-        {session.name !== '' && location==='/dashboard' && <input
+        {session.name !== '' && location === '/dashboard' && <input
           type="text"
           placeholder="search..."
           className="navbar-finder"

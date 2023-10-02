@@ -4,9 +4,8 @@ interface IPostProps {
   posts: IRows[];
   likes: any[];
 }
-export const PostContainer =({ posts,likes }: IPostProps) => {
-  console.log('likes',likes);
-  
+export const PostContainer = ({ posts, likes }: IPostProps) => {
+
   const updatedPosts = posts.map((post) => {
     const isLiked = likes.find((like) => {
       if (like.post_id === post.id) {
@@ -15,16 +14,15 @@ export const PostContainer =({ posts,likes }: IPostProps) => {
     });
     return { ...post, like: !!isLiked };
   });
-  
+
   return (
     <section className="posts-container">
 
-      {updatedPosts.map((post) =>{
-        console.log(post);
-        return(
-        <Post key={post.id} post={post}/>)
-        })}
-        
+      {updatedPosts.map((post) => {
+        return (
+          <Post key={post.id} post={post} />)
+      })}
+
     </section>
   )
 }

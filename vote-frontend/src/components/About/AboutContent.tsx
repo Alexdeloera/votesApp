@@ -1,5 +1,5 @@
 import './aboutContent.css'
-export const AboutContent= () => {
+export const AboutContent = () => {
   return (
     <section className="about-container">
       <h1 className="about-title">About!</h1>

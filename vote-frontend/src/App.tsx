@@ -8,7 +8,7 @@ import { Login } from './views/Login'
 import { CreatePost } from './views/CreatePost'
 import { Dashboard } from './views/Dashboard'
 import { About } from './views/About'
-import { ProtectedRoutes } from './routes/protectedRoutes'
+import { ProtectedRoutes } from './routes/ProtectedRoutes'
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route path='/home' element={<Home />} />
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
-        <Route element={<ProtectedRoutes/>}>
+        <Route element={<ProtectedRoutes />}>
           <Route path='/createpost' element={<CreatePost />} />
           <Route path='/dashBoard' element={<Dashboard />} />
         </Route>

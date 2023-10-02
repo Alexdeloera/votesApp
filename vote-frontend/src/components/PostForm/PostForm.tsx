@@ -3,14 +3,14 @@ import './postForm.css'
 import PostValidations from "../../validations/PostValidations"
 import { iPost } from "../../views/CreatePost"
 
-interface ICretateProps{
-  id:number,
-  name:String,
-  postSubmit:(values:iPost)=>void
+interface ICretateProps {
+  id: number,
+  name: String,
+  postSubmit: (values: iPost) => void
 }
 
 
-export const PostForm = ({name,id,postSubmit}:ICretateProps) => {
+export const PostForm = ({ name, id, postSubmit }: ICretateProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       title: '',
@@ -20,7 +20,7 @@ export const PostForm = ({name,id,postSubmit}:ICretateProps) => {
       body: ''
     }
   })
-  
+
   return (
     <>
       <div className="postForm-container">
@@ -33,14 +33,14 @@ export const PostForm = ({name,id,postSubmit}:ICretateProps) => {
               <div className="postForm-container_inputs">
                 <input
                   type="text"
-                  placeholder="title" 
+                  placeholder="title"
                   className="postForm-input"
-                  {...register("title",PostValidations.title)}
+                  {...register("title", PostValidations.title)}
                 />
                 {errors.title && <p className='formRegiser-mesage'>{errors.title?.message}</p>}
               </div>
               <div className="postForm-container_inputs">
-                <select className="postForm-select" {...register("state",PostValidations.state)}>
+                <select className="postForm-select" {...register("state", PostValidations.state)}>
                   <option value="" selected>Select state</option>
                   <option value="Aguascalientes">Aguascalientes</option>
                   <option value="Baja California">Baja California</option>
@@ -75,7 +75,7 @@ export const PostForm = ({name,id,postSubmit}:ICretateProps) => {
                   <option value="Yucatán">Yucatán</option>
                   <option value="Zacatecas">Zacatecas</option>
                 </select>
-                
+
               </div>
               {errors.state && <p className='formRegiser-mesage'>{errors.state?.message}</p>}
               <div className="postForm-container_inputs">
@@ -83,16 +83,16 @@ export const PostForm = ({name,id,postSubmit}:ICretateProps) => {
                   type="text"
                   value={name.toString()}
                   disabled={true}
-                  className="postForm-input" 
-                  {...register("user_id",PostValidations.user_id)}/>
-                  {errors.user_id && <p className='formRegiser-mesage'>{errors.user_id?.message}</p>}
+                  className="postForm-input"
+                  {...register("user_id", PostValidations.user_id)} />
+                {errors.user_id && <p className='formRegiser-mesage'>{errors.user_id?.message}</p>}
               </div>
               <div className="postForm-container_inputs">
                 <input
                   type="date"
                   placeholder="date"
                   className="postForm-input "
-                  {...register("date",PostValidations.date)}
+                  {...register("date", PostValidations.date)}
                 />
                 {errors.date && <p className='formRegiser-mesage'>{errors.date?.message}</p>}
               </div>
@@ -100,7 +100,7 @@ export const PostForm = ({name,id,postSubmit}:ICretateProps) => {
                 <textarea
                   placeholder="tap your ideas!"
                   className="postForm-textArea"
-                  {...register("body",PostValidations.body)}
+                  {...register("body", PostValidations.body)}
                 />
                 {errors.body && <p className='formRegiser-mesage'>{errors.body?.message}</p>}
               </div>

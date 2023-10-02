@@ -3,6 +3,7 @@ import { sessionProvider } from "../../context/SessionContext";
 import { postLike } from "../../api/postLike";
 import { deleteLike } from "../../api/deleteLike";
 import './Post.css'
+import { set } from "react-hook-form";
 interface IRowsProps {
   post: IRows;
 }
@@ -23,32 +24,30 @@ export const Post = ({ post }: IRowsProps) => {
   const [like, setLike] = useState(post.like);
   const [likes, setLikes] = useState(post.like_count);
   const { session } = useContext(sessionProvider)
-   
+  const [message, setMessage] = useState('');
+
   const handleLike = async () => {
-     console.log('post',post.like);
-     setLike(post.like);
-     console.log('like',like);
-     
+    setLike(post.like);
+
     if (like === false) {
-        setLike(like);
+      setLike(like);
 
       try {
         await postLike({ token: session.token, values: { post_id: post.id, user_id: session.id } });
         setLike(!like);
         setLikes(likes + 1);
-      } catch (error) {
-        console.error(error);
+      } catch (error: any) {
+        setMessage(error.message);
       }
 
     } else if (like) {
-      console.log('dislike');
 
       try {
         await deleteLike({ token: session.token, values: { post_id: post.id, user_id: session.id } });
         setLike(!like);
         setLikes(likes - 1);
-      } catch (error) {
-        console.error(error);
+      } catch (error: any) {
+        setMessage(error.message);
       }
 
     }
@@ -66,7 +65,7 @@ export const Post = ({ post }: IRowsProps) => {
         <li>State: {post.state}</li>
         <li>Date: {post.date}</li>
         <li>Author: {post.name}</li>
-        <hr className="post-hr"/>
+        <hr className="post-hr" />
         <li>{post.body}</li>
       </ul>
       {!like ? <button
@@ -86,6 +85,8 @@ export const Post = ({ post }: IRowsProps) => {
           className=""
         /></button>}
       <span className="absolute top-4 right-12">{likes}</span>
+      {message && <p className="text-red-500">{message}</p>}
+
     </article>
   )
 };
