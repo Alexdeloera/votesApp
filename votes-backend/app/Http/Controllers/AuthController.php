@@ -12,37 +12,37 @@ use Illuminate\Support\Facades\Hash as FacadesHash;
 
 class AuthController extends Controller
 {
-    public function getUser(Request $request){
+    public function getUser(Request $request)
+    {
 
-        if($request->has('user_id')){
-            $user=User::where('id',$request->user_id)->get();
-        }else{
-            $user=User::all();
+        if ($request->has('user_id')) {
+            $user = User::where('id', $request->user_id)->get();
+        } else {
+            $user = User::all();
         }
-        return response()->json($user,200);
+        return response()->json($user, 200);
     }
 
     public function singnIn(SignInRequest $request)
     {
-        if (!Auth::attempt($request->only('email','password')))
-        {
+        if (!Auth::attempt($request->only('email', 'password'))) {
             return response()
-                ->json(["success"=>false,"message"=>"Singn in unsuccessful"],401);
+                ->json(["success" => false, "message" => "Singn in unsuccessful"], 401);
         }
-        $user=User::where('email',$request['email'])->firstOrFail();
-        $token=$user->createToken('aunth_token')->plainTextToken;
+        $user = User::where('email', $request['email'])->firstOrFail();
+        $token = $user->createToken('aunth_token')->plainTextToken;
 
         return response()
             ->json([
-                "success"=>true,
-                "message"=>"Singn in successful",
-                "access_token"=>$token,
-                "token_type"=>'Bearer',
-                "user"=>[
-                    "id"=>$user->id, 
-                    "name"=>$user->name,
-                    "email"=>$user->email,
-                    "createdAt"=>$user->created_at
+                "success" => true,
+                "message" => "Singn in successful",
+                "access_token" => $token,
+                "token_type" => 'Bearer',
+                "user" => [
+                    "id" => $user->id,
+                    "name" => $user->name,
+                    "email" => $user->email,
+                    "createdAt" => $user->created_at
                 ]
             ]);
     }

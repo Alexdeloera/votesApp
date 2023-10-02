@@ -13,17 +13,17 @@ class PostController extends Controller
   {
     if ($request->has('finder')) {
       $posts = Post::select('post.title', 'post.date', 'post.id', 'post.body', 'post.state', 'users.name', Likes::raw('count(likes.id) as like_count'))
-      ->leftJoin('users', 'post.user_id', '=', 'users.id')
-      ->leftJoin('likes', 'post.id', '=', 'likes.post_id')->where('post.title', 'like', '%' . $request->finder . '%' ,'||' ,'post.state', 'like', '%' . $request->finder . '%')
-      ->groupBy('post.title', 'post.date', 'post.id', 'post.body', 'post.state', 'users.name')
-      ->get();
+        ->leftJoin('users', 'post.user_id', '=', 'users.id')
+        ->leftJoin('likes', 'post.id', '=', 'likes.post_id')->where('post.title', 'like', '%' . $request->finder . '%', '||', 'post.state', 'like', '%' . $request->finder . '%')
+        ->groupBy('post.title', 'post.date', 'post.id', 'post.body', 'post.state', 'users.name')
+        ->get();
     } else {
       $posts = Post::select('post.title', 'post.date', 'post.id', 'post.body', 'post.state', 'users.name', Likes::raw('count(likes.id) as like_count'))
-      ->leftJoin('users', 'post.user_id', '=', 'users.id')
-      ->leftJoin('likes', 'post.id', '=', 'likes.post_id')
-      ->groupBy('post.title', 'post.date', 'post.id', 'post.body', 'post.state', 'users.name')
-      ->get();
-        
+        ->leftJoin('users', 'post.user_id', '=', 'users.id')
+        ->leftJoin('likes', 'post.id', '=', 'likes.post_id')
+        ->groupBy('post.title', 'post.date', 'post.id', 'post.body', 'post.state', 'users.name')
+        ->get();
+
 
       return response()->json($posts, 200);
     }
@@ -58,22 +58,20 @@ class PostController extends Controller
 
     if ($request->has('post_id')) {
       $data = json_decode($request->getContent());
-      $likes = Likes::where('post_id',$data->post_id)->get();
+      $likes = Likes::where('post_id', $data->post_id)->get();
 
-      if (sizeof($likes)>0) {
+      if (sizeof($likes) > 0) {
         $response["message"] = "This post cant be deleted";
-        return response()->json($response,400);
-
+        return response()->json($response, 400);
       } else {
 
         try {
 
           Post::where('id', true)->delete();
           $response["message"] = "This post be deleted";
-          return response()->json($response,200);
-
+          return response()->json($response, 200);
         } catch (Exception $e) {
-          return response()->json($e,400);
+          return response()->json($e, 400);
         }
       }
     }
