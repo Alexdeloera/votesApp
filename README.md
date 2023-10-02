@@ -9,28 +9,10 @@ Use npm to add the modules: [npm ](https://www.npmjs.com/).
 
 ```bash
 npm install
-```
-Use node v16.
-
-This are made in vite plataform.
-To use we need:
-
-Tailwind
-```bash
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
-```
-react-router-dom
-
-```bash
 npm install react-router-dom
-```
-Axios
-```bash
 npm install axios
-```
-UseForm
-```bash
 npm install react-hook-form
 ```
 
